@@ -17,73 +17,42 @@ namespace ConsoleApp1
             Car newCar = new Car(GenerateID());
 
             Console.WriteLine("Type year car made");
-            int yearMade;
-            bool sucess = int.TryParse(Console.ReadLine(), out yearMade);
-            if (sucess)
-            {
-                newCar.Year = yearMade;
-            }
-
+            int yearMade = ValidateIntInput();
+            newCar.Year = yearMade;
 
             Console.WriteLine("Type driven KM");
-            int drivenKM;
-            sucess = int.TryParse(Console.ReadLine(), out drivenKM);
-            if (sucess)
-            {
-                newCar.DrivedKM = drivenKM;
-            }
+            int drivenKM = ValidateIntInput();
+            newCar.DrivedKM = drivenKM;
+
             Console.WriteLine("Type brand");
-            newCar.Brand = Console.ReadLine();
+            newCar.Brand = ValidateStringInput();
+
             Console.WriteLine("Type model");
-            newCar.Model = Console.ReadLine();
+            newCar.Model = ValidateStringInput();
+
             Console.WriteLine("Choose witch energy type:");
             Console.WriteLine(Energy.disel);
             Console.WriteLine(Energy.gas);
             Console.WriteLine(Energy.elektro);
             Console.WriteLine(Energy.hybrid);
-            string choiceEnergy = Console.ReadLine();
-            switch (choiceEnergy)
-            {
-                case "disel":
-                    newCar.Energy = Energy.disel;
-                    break;
-                case "gas":
-                    newCar.Energy = Energy.gas;
-                    break;
-                case "elektro":
-                    newCar.Energy = Energy.elektro;
-                    break;
-                case "hybrid":
-                    newCar.Energy = Energy.hybrid;
-                    break;
-                default:
-                    Console.WriteLine("You didnt type a correct value try again.");
-                    break;
-            }
+            Energy choiceEnergy = ValidateEnergyInput();
+            newCar.Energy = choiceEnergy;
+            
             Console.WriteLine("Type price");
-            decimal price;
-            sucess = decimal.TryParse(Console.ReadLine(), out price);
-            if (sucess)
-            {
-                newCar.Price = price;
-            }
+            decimal price = ValidateDecimalInput();
+            newCar.Price = price;
+
             Console.WriteLine("Type city");
-            newCar.City = Console.ReadLine();
+            newCar.City = ValidateStringInput();
 
             Console.WriteLine("Type door count");
-            int doorCount;
-            sucess = int.TryParse(Console.ReadLine(), out doorCount);
-            if (sucess)
-            {
-                newCar.DoorCount = doorCount;
-            }
-            Console.WriteLine("Was a car crashed ?(yes or no)");
-            bool crashed;
-            sucess = bool.TryParse(Console.ReadLine(), out crashed);
-            if (crashed)
-            {
-                newCar.Crashed = crashed;
-            }
+            int doorCount = ValidateIntInput();
+            newCar.DoorCount = doorCount;
+
+            Console.WriteLine("Was a car crashed ?(True or false)");
+            bool crashed = ValidateBoolInput();
+            newCar.Crashed = crashed;
+
             Cars.Add(newCar);
             return newCar;
         }
@@ -438,6 +407,108 @@ namespace ConsoleApp1
                     FileteredCars.RemoveAt(i);
                 }
             }
+        }
+        public static int ValidateIntInput()
+        {
+            bool success = false;
+            int result = 0;
+            while (!success)
+            {
+                success = int.TryParse(Console.ReadLine(), out result);
+                if (success)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Type correct number");
+                }
+            }
+            return result;
+        }
+        public static decimal ValidateDecimalInput()
+        {
+            bool success = false;
+            decimal result = 0;
+            while (!success)
+            {
+                success = decimal.TryParse(Console.ReadLine(), out result);
+                if (success)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Type correc number");
+                }
+            }
+            return result;
+        }
+        public static bool ValidateBoolInput()
+        {
+            bool success = false;
+            bool result = false;
+            while (!success)
+            {
+                success = bool.TryParse(Console.ReadLine(), out result);
+                if (success)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Type correct answer. (True or False)");
+                }
+            }
+            return result;
+        }
+        public static String ValidateStringInput()
+        {
+            string result = "bad input";
+            bool success = false;
+            while (!success)
+            {
+                result = Console.ReadLine();
+                if (!result.Equals(""))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Type correct text");
+                }
+            }
+            return result;
+        }
+        public static Energy ValidateEnergyInput()
+        {
+            Energy result = Energy.gas;
+            bool success = false;
+            while(!success){
+                switch (Console.ReadLine())
+                {
+                    case "disel":
+                        result = Energy.disel;
+                        success = true;
+                        break;
+                    case "gas":
+                        result = Energy.gas;
+                        success = true;
+                        break;
+                    case "elektro":
+                        result = Energy.elektro;
+                        success = true;
+                        break;
+                    case "hybrid":
+                        result = Energy.hybrid;
+                        success = true;
+                        break;
+                    default:
+                        Console.WriteLine("You didnt type a correct value try again.");
+                        break;
+                }
+            }
+            return result;
         }
         
     }
