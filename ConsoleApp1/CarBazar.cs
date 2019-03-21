@@ -436,8 +436,7 @@ namespace ConsoleApp1
             int result = 0;
             while (!success)
             {
-                success = int.TryParse(Console.ReadLine(), out result);
-                if (success)
+                if (int.TryParse(Console.ReadLine(), out result) && result>0)
                 {
                     break;
                 }
@@ -454,10 +453,12 @@ namespace ConsoleApp1
             decimal result = 0;
             while (!success)
             {
-                success = decimal.TryParse(Console.ReadLine(), out result);
-                if (success)
+                if (decimal.TryParse(Console.ReadLine(), out result) && result >=0)
                 {
-                    break;
+                    if (result>0)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
