@@ -84,8 +84,8 @@ namespace ConsoleApp1
                     newCar.DoorCount = int.Parse(loadedCar[8]);
                     newCar.Crashed = bool.Parse(loadedCar[9]);
                     Cars.Add(newCar);
-                    Console.WriteLine("Cars have been loaded");
                 }
+                Console.WriteLine("Cars have been loaded");
             }
             else
             {
@@ -132,70 +132,92 @@ namespace ConsoleApp1
             Console.Write(", city");
             Console.Write(", door count");
             Console.WriteLine(", crashed");
-            string choice = Console.ReadLine();
-            switch (choice)
+            
+            bool end = false;
+            while (!end)
             {
-                case "year":
-                    {
-                        int newYear;
-                        bool success = int.TryParse(Console.ReadLine(), out newYear);
-                        oldCar.Year = newYear;
-                        break;
-                    }
-                case "drived kilometers":
-                    {
-                        int newDrivedKm;
-                        bool success = int.TryParse(Console.ReadLine(), out newDrivedKm);
-                        oldCar.DrivedKM = newDrivedKm;
-                        break;
-                    }
-                case "brand":
-                    {
-                        String newBrand = Console.ReadLine();
-                        oldCar.Brand = newBrand;
-                        break;
-                    }
-                case "model":
-                    {
-                        String newModel = Console.ReadLine();
-                        oldCar.Model = newModel;
-                        break;
-                    }
-                case "energy":
-                    {
-                        Energy newEnergy;
-                        newEnergy = (Energy)Enum.Parse(typeof(Energy), Console.ReadLine());
-                        oldCar.Energy = newEnergy;
-                        break;
-                    }
-                case "price":
-                    {
-                        decimal newPrice;
-                        bool success = decimal.TryParse(Console.ReadLine(), out newPrice);
-                        oldCar.Price = newPrice;
-                        break;
-                    }
-                case "city":
-                    {
-                        String newCity = Console.ReadLine();
-                        oldCar.City = newCity;
-                        break;
-                    }
-                case "door count":
-                    {
-                        int newDoorCount;
-                        bool success = int.TryParse(Console.ReadLine(), out newDoorCount);
-                        oldCar.DoorCount = newDoorCount;
-                        break;
-                    }
-                case "crashed":
-                    {
-                        bool newCrashed;
-                        bool success = bool.TryParse(Console.ReadLine(), out newCrashed);
-                        oldCar.Crashed = newCrashed;
-                        break;
-                    }
-                    
+                string choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "year":
+                        {
+                            Console.WriteLine("Type new year");
+                            int newYear = ValidateIntInput();
+                            oldCar.Year = newYear;
+                            end = true;
+                            break;
+                        }
+                    case "drived kilometers":
+                        {
+                            Console.WriteLine("Type new drived kilometers");
+                            int newDrivedKm = ValidateIntInput();
+                            oldCar.DrivedKM = newDrivedKm;
+                            end = true;
+                            break;
+                        }
+                    case "brand":
+                        {
+                            Console.WriteLine("Type new brand");
+                            String newBrand = ValidateStringInput();
+                            oldCar.Brand = newBrand;
+                            end = true;
+                            break;
+                        }
+                    case "model":
+                        {
+                            Console.WriteLine("Type new model");
+                            String newModel = ValidateStringInput();
+                            oldCar.Model = newModel;
+                            end = true;
+                            break;
+                        }
+                    case "energy":
+                        {
+                            Console.WriteLine("Type new energy type");
+                            Energy newEnergy = ValidateEnergyInput();
+                            oldCar.Energy = newEnergy;
+                            end = true;
+                            break;
+                        }
+                    case "price":
+                        {
+                            Console.WriteLine("Type new price");
+                            decimal newPrice = ValidateDecimalInput();
+                            oldCar.Price = newPrice;
+                            end = true;
+                            break;
+                        }
+                    case "city":
+                        {
+                            Console.WriteLine("Type new city");
+                            String newCity = ValidateStringInput();
+                            oldCar.City = newCity;
+                            end = true;
+                            break;
+                        }
+                    case "door count":
+                        {
+                            Console.WriteLine("Type new door count");
+                            int newDoorCount = ValidateIntInput();
+                            oldCar.DoorCount = newDoorCount;
+                            end = true;
+                            break;
+                        }
+                    case "crashed":
+                        {
+                            Console.WriteLine("Type if it was crashed");
+                            bool newCrashed = ValidateBoolInput();
+                            oldCar.Crashed = newCrashed;
+                            end = true;
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Type correct choice");
+                            break;
+                        }
+
+                }
             }
         }
         public static void RemoveCar(Car oldCar)

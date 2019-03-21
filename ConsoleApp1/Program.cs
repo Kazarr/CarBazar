@@ -80,6 +80,7 @@ namespace ConsoleApp1
                             string answer = Console.ReadLine();
                             if (answer.Contains("yes"))
                             {
+                                changed = false;
                                 CarBazar.LoadCars(path);
                             }
                             else
