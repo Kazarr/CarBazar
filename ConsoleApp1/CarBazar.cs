@@ -49,7 +49,7 @@ namespace ConsoleApp1
             int doorCount = ValidateIntInput();
             newCar.DoorCount = doorCount;
 
-            Console.WriteLine("Was a car crashed ?(yes or no)");
+            Console.WriteLine("Was a car crashed ?(True or false)");
             bool crashed = ValidateBoolInput();
             newCar.Crashed = crashed;
 
@@ -457,7 +457,7 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    Console.WriteLine("Type correct answer. (Yes or No)");
+                    Console.WriteLine("Type correct answer. (True or False)");
                 }
             }
             return result;
